@@ -1,0 +1,47 @@
+<?php
+$isMsg = '';
+if (isset($_POST['submit'])){
+	/*
+	echo '<pre>';
+	print_r($_POST);
+	echo '</pre>';*/
+	$con = mysqli_connect("localhost:3307","root","","demo") or die("could not able to connect");
+	$sql = 'INSERT registration SET '.
+			'Patient_id =\''.$_POST['Patient_id'].'\', '.
+			'Patient_name =\''.$_POST['Patient_name'].'\', '.
+			'Problem =\''.$_POST['Problem'].'\', '.
+			'Sex =\''.$_POST['Sex'].'\', '.
+			'Location =\''.$_POST['Location'].'\', '.
+			'Age =\''.$_POST['Age'].'\' ';
+	//echo $sql;
+	
+	mysqli_query($con, $sql) or die('Could not able to execute the query');
+	$isMsg = 'You have registered successfully...';
+}
+?>
+
+
+
+
+
+ <html>
+<body>
+
+<?php 
+	if($isMsg != '') {
+		echo '<h1>'.$isMsg.'</h1>';
+	}
+?>
+
+<form action="entry.php" method="post">
+Patient_id: <input type="text" name="Patient_id"><br>
+Patient_name: <input type="text" name="Patient_name"><br>
+Problem: <input type="text" name="Problem"><br>
+Sex: <input type="text" name="Sex"><br>
+Location: <input type="text" name="Location"><br>
+Age: <input type="text" name="Age"><br> 
+<input type="submit" name="submit" value="submit">
+</form>
+
+</body>
+</html> 
